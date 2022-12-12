@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import { createNewPost } from "../api/auth";
 import { fetchMe } from "../api/auth";
+import { Link } from "react-router-dom";
 
-export const Post = ({ posts, setPosts }) => {
+export const Post = ({ user, posts, setPosts }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  
+  const handleLogout = () => {
+    // idea is to change the token state / remove it from localStorage
+    setToken(null);
+    localStorage.removeItem("token");
+  };
 
   return (
+    
     <div>
+      <div className="profile-nav">
+      <header>
+        <h1>Welcome to Stranger's Things, {user.username}!</h1>
+        <div className="Nav">
+          {/* <Nav></Nav> */}
+          <Link to="/home">Home</Link>
+          <Link to="/post">Create New Post</Link>
+          <Link to="/profile">User Profile</Link>
+          <button className="logoutbutton" onClick={handleLogout}>
+            Log Out
+          </button>
+        </div>
+      </header>
+    
+      </div>
       <form
         onSubmit={async () => {
           try {
@@ -62,13 +85,20 @@ const getMe = async () => {
   return data;
 };
 
-export const Test = () => {
+export const MyPosts = ({singlePost}) => {
   // Only run the getMe function IF a token exists.
   // const data = await getMe();
   // console.log("This is data.posts", data.posts);
   // const posts = data.posts;
+  
   return (
-    <div>Let's pretend React didn't wreck me and these are your posts. :D </div>
+    <div className="App">
+      <h3>{singlePost.title}</h3>
+      <p>{singlePost.description}</p>
+      <p>{singlePost.author.username}</p>
+      <p>{singlePost.price}</p>
+      <button>Delete Post</button>
+    </div>
   );
 };
 

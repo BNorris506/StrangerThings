@@ -17,6 +17,8 @@ function App() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
+  
+  // running this useEffect whenever state of token changes, it will run fetchMe and getMe which assigns the data of our logged in user to the state of user
   useEffect(() => {
     const getMe = async () => {
       const data = await fetchMe(token);
@@ -29,9 +31,17 @@ function App() {
     }
   }, [token]);
 
+//   console.log('this is the user variable on app.js', user);
+// then taking the new user from the useEffect above to create a userPosts array of objects to use in displaying specific user posts only on profile page 
+  const userPosts = user.posts;
+// console.log('this is user array of object messages called userPosts',userPosts);
+
+  // run getPosts and assign the value to Posts state
   useEffect(() => {
     getPosts(setPosts);
   }, []);
+
+
 
   // this function checks the state of token, if yes (aka you are signed in and have a token), then render the home page, ELSE (aka you don't have a token and are not signed in) render the signin page
   const isLoggedIn = () => {
@@ -72,7 +82,8 @@ function App() {
             />
           }
         ></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        {/* going to pass the userPosts through profile to map and pass through to a HTML component to render all userposts  */}
+        <Route path="/profile" element={<Profile userPosts={userPosts} setToken={setToken} user={user}/>}></Route>
         <Route path="*" element={<ErrorComponent />}>
           {" "}
         </Route>

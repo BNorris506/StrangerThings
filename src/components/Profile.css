@@ -1,9 +1,10 @@
 .center-container{
     position: relative; 
-    top: -200px;
+    /* top: -200px; */
 }
 
 .profile-nav{
     position: relative; 
-    left: 650px; 
+    /* left: 650px;  */
 }
+

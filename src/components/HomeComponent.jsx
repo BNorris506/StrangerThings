@@ -15,8 +15,10 @@ const HomeComponent = ({ posts, user, setToken, setPosts }) => {
       <header>
         <h1>Welcome to Stranger's Things, {user.username}!</h1>
         <div className="Nav">
-          <Nav></Nav>
-          <Link to="/post">NewPost</Link>
+          {/* <Nav></Nav> */}
+          <Link to="/home">Home</Link>
+          <Link to="/post">Create New Post</Link>
+          <Link to="/profile">User Profile</Link>
           <button className="logoutbutton" onClick={handleLogout}>
             Log Out
           </button>
