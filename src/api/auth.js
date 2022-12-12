@@ -19,7 +19,6 @@ export const registerUser = async (username, password) => {
 });
 //below is the same as assign the token key off data object off the response object which we parsed into JSON aka 
 
-//  data = response.data.token  
 
 const {data: { token }} = await response.json();
   return token;
@@ -47,14 +46,6 @@ export const getPosts = async (setPosts) => {
   })
   .catch(console.error);
 
-//   try {
-//     const response = await fetch (`https://strangers-things.herokuapp.com/api/${cohortName}/posts`);
-//     const {data: {posts}} = await response.json();
-//     setPosts(posts);
-//     return 
-//   } catch (error) {
-//     console.log(error);
-//   }
 }
 
 
@@ -74,7 +65,7 @@ export const fetchMe = async (token) => {
   return data;
   } catch (error) {
     console.error(error);
-  }
+  }console.log("This is me object: ", data)
 }
 
 
@@ -95,7 +86,6 @@ export const fetchLoginUser = async (username, password) => {
 });
 //below is the same as assign the token key off data object off the response object which we parsed into JSON aka 
 
-//  data = response.data.token  
 
 const {data: { token }} = await response.json();
 console.log(token);
@@ -108,7 +98,6 @@ return token;
 
 
 export const createNewPost = async (title, description, price) => {
-  // e.preventDefault();
   const token = window.localStorage.getItem("token");
 
   try {
@@ -127,7 +116,6 @@ export const createNewPost = async (title, description, price) => {
         }
       })
     });
-    // const {data: { post }} = await response.json();
     const data = await response.json();
     console.log(data);
     return data;
@@ -137,24 +125,3 @@ export const createNewPost = async (title, description, price) => {
 };
 
 
-
-
-  //   try {
-//     const response = await fetch (`https://strangers-things.herokuapp.com/api/${cohortName}/users/login`, 
-//     {
-//       method: "POST",
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//   body: JSON.stringify({
-//     user: {
-//       username,
-//       password,
-//     }
-//   })
-//   } catch (error) {
-//     console.error(error);
-//   }
-// )
-// }
-// };

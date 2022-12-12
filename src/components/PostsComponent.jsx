@@ -1,7 +1,6 @@
 import React from "react";
 
 const PostsComponent = ({ singlePost }) => {
-  // console.log(props);
   return (
     <div className="App">
       <h3>{singlePost.title}</h3>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Register from "./RegisterComponent";
 import { Link } from "react-router-dom";
 import { fetchLoginUser } from "../api/auth";
 

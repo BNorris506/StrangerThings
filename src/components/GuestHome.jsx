@@ -9,6 +9,7 @@ const GuestHome = ({ posts }) => {
         <h1>Welcome to Stranger's Things, Stranger!</h1>
         <div className="Nav">
           <Link to="/register">Register</Link>
+          <Link to="/">Log In</Link>
         </div>
       </header>
       <div className="posts">

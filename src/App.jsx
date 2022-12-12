@@ -63,7 +63,14 @@ function App() {
         <Route path="/guest" element={<GuestHome posts={posts} />}></Route>
         <Route
           path="/post"
-          element={<Post posts={posts} setPosts={setPosts} />}
+          element={
+            <Post
+              posts={posts}
+              setPosts={setPosts}
+              user={user}
+              setUser={setUser}
+            />
+          }
         ></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="*" element={<ErrorComponent />}>

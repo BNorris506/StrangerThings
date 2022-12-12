@@ -1,10 +1,9 @@
 import React from "react";
 import PostsComponent from "./PostsComponent";
 import Nav from "./Nav";
-import createNewPost from "./Post";
 import { Link } from "react-router-dom";
 
-const HomeComponent = ({ posts, user, setToken }) => {
+const HomeComponent = ({ posts, user, setToken, setPosts }) => {
   const handleLogout = () => {
     // idea is to change the token state / remove it from localStorage
     setToken(null);
@@ -18,7 +17,9 @@ const HomeComponent = ({ posts, user, setToken }) => {
         <div className="Nav">
           <Nav></Nav>
           <Link to="/post">NewPost</Link>
-          <button onClick={handleLogout}>Log Out</button>
+          <button className="logoutbutton" onClick={handleLogout}>
+            Log Out
+          </button>
         </div>
       </header>
       <div className="posts">
