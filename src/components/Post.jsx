@@ -8,7 +8,7 @@ export const Post = ({ user, posts, setPosts }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  
+
   const handleLogout = () => {
     // idea is to change the token state / remove it from localStorage
     setToken(null);
@@ -16,22 +16,20 @@ export const Post = ({ user, posts, setPosts }) => {
   };
 
   return (
-    
-    <div>
+    <div className="PostPage">
       <div className="profile-nav">
-      <header>
-        <h1>Welcome to Stranger's Things, {user.username}!</h1>
-        <div className="Nav">
-          {/* <Nav></Nav> */}
-          <Link to="/home">Home</Link>
-          <Link to="/post">Create New Post</Link>
-          <Link to="/profile">User Profile</Link>
-          <button className="logoutbutton" onClick={handleLogout}>
-            Log Out
-          </button>
-        </div>
-      </header>
-    
+        <header>
+          <h1>Welcome to Stranger's Things, {user.username}!</h1>
+          <div className="Nav">
+            {/* <Nav></Nav> */}
+            <Link to="/home">Home</Link>
+            <Link to="/post">Create New Post</Link>
+            <Link to="/profile">User Profile</Link>
+            <button className="logoutbutton" onClick={handleLogout}>
+              Log Out
+            </button>
+          </div>
+        </header>
       </div>
       <form
         onSubmit={async () => {
@@ -86,8 +84,7 @@ const getMe = async () => {
   return data;
 };
 
-export const MyPosts = ({singlePost}) => {
-  
+export const MyPosts = ({ singlePost }) => {
   return (
     <div className="App">
       <h3>{singlePost.title}</h3>
@@ -95,10 +92,8 @@ export const MyPosts = ({singlePost}) => {
       <p>{singlePost.author.username}</p>
       <p>{singlePost.price}</p>
       {/* <button>Delete Post</button> */}
-      <button onClick={deletePost()} >Delete Post</button>
+      <button onClick={deletePost()}>Delete Post</button>
       {/* cant get button to delete posts to work above. I know we need to pass at least the post ID, but not sure how to single that out based on the user posts that are being display, how to pass that into deletePost as a parameter. didnt have time to try and test if I can pass the event.target.postID or something like that */}
     </div>
   );
 };
-
-
