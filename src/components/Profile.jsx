@@ -35,7 +35,8 @@ const Profile = ({userPosts, setToken, user}) => {
       <h2>My Posts</h2>
       {console.log('this is userPosts inside Profile componenent passing as a prop',userPosts)}
       {userPosts.map((singlePost) => {
-        return (<MyPosts key={singlePost.id} singlePost={singlePost}/>);
+        // calling MyPosts from teh Profile.jsx component
+        return (<MyPosts key={singlePost._id} singlePost={singlePost}/>);
       })}
       
     </div>

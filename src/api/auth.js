@@ -125,3 +125,17 @@ export const createNewPost = async (title, description, price) => {
 };
 
 
+export const deletePost = async (token) => {
+  try { 
+    const response = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts/5e8d1bd48829fb0017d2233b`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+}

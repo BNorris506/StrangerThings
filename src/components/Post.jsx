@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createNewPost } from "../api/auth";
 import { fetchMe } from "../api/auth";
 import { Link } from "react-router-dom";
+import { deletePost } from "../api/auth";
 
 export const Post = ({ user, posts, setPosts }) => {
   const [title, setTitle] = useState("");
@@ -86,10 +87,6 @@ const getMe = async () => {
 };
 
 export const MyPosts = ({singlePost}) => {
-  // Only run the getMe function IF a token exists.
-  // const data = await getMe();
-  // console.log("This is data.posts", data.posts);
-  // const posts = data.posts;
   
   return (
     <div className="App">
@@ -97,9 +94,11 @@ export const MyPosts = ({singlePost}) => {
       <p>{singlePost.description}</p>
       <p>{singlePost.author.username}</p>
       <p>{singlePost.price}</p>
-      <button>Delete Post</button>
+      {/* <button>Delete Post</button> */}
+      <button onClick={deletePost()} >Delete Post</button>
+      {/* cant get button to delete posts to work above. I know we need to pass at least the post ID, but not sure how to single that out based on the user posts that are being display, how to pass that into deletePost as a parameter. didnt have time to try and test if I can pass the event.target.postID or something like that */}
     </div>
   );
 };
 
-export default createNewPost;
+
