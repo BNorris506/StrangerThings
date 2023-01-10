@@ -3,7 +3,7 @@ import { MyPosts } from "./Post";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 
-const Profile = ({userPosts, setToken, user}) => {
+const Profile = ({posts, setPosts, userPosts, setToken, user}) => {
   const handleLogout = () => {
     // idea is to change the token state / remove it from localStorage
     setToken(null);
@@ -33,10 +33,10 @@ const Profile = ({userPosts, setToken, user}) => {
         am.
       </p>
       <h2>My Posts</h2>
-      {console.log('this is userPosts inside Profile componenent passing as a prop',userPosts)}
-      {userPosts.map((singlePost) => {
+      {/* {console.log('this is userPosts inside Profile componenent passing as a prop',userPosts)} */}
+      {userPosts?.map((singlePost) => {
         // calling MyPosts from teh Profile.jsx component
-        return (<MyPosts key={singlePost._id} singlePost={singlePost}/>);
+        return (<MyPosts key={singlePost._id} singlePost={singlePost} posts={posts} setPosts={setPosts}/>);
       })}
       
     </div>

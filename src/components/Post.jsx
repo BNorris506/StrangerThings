@@ -84,7 +84,10 @@ const getMe = async () => {
   return data;
 };
 
-export const MyPosts = ({ singlePost }) => {
+export const MyPosts = ({ singlePost, posts, setPosts }) => {
+  
+  const postId = singlePost._id;
+  
   return (
     <div className="App">
       <h3>{singlePost.title}</h3>
@@ -92,8 +95,13 @@ export const MyPosts = ({ singlePost }) => {
       <p>{singlePost.author.username}</p>
       <p>{singlePost.price}</p>
       {/* <button>Delete Post</button> */}
-      <button onClick={deletePost()}>Delete Post</button>
-      {/* cant get button to delete posts to work above. I know we need to pass at least the post ID, but not sure how to single that out based on the user posts that are being display, how to pass that into deletePost as a parameter. didnt have time to try and test if I can pass the event.target.postID or something like that */}
+      <button onClick={() => deletePost(posts, setPosts, postId)}>Delete Post</button>
+      
     </div>
   );
 };
+
+
+// Delete post by postId
+// setPosts to new posts array 
+// rerender page with new posts (aka 1 post has been deleted)

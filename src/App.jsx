@@ -15,6 +15,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState({});
+
   const navigate = useNavigate();
 
   
@@ -33,7 +34,14 @@ function App() {
 
 //   console.log('this is the user variable on app.js', user);
 // then taking the new user from the useEffect above to create a userPosts array of objects to use in displaying specific user posts only on profile page 
+
   const userPosts = user.posts;
+
+  // useEffect((user) => {
+  //   console.log(user.posts)
+  //   setUserPosts(user.posts);
+  // }, []);
+
 // console.log('this is user array of object messages called userPosts',userPosts);
 
   // run getPosts and assign the value to Posts state
@@ -51,6 +59,7 @@ function App() {
   useEffect(() => {
     isLoggedIn();
   }, [token]);
+
 
   return (
     <div id="container">
@@ -83,7 +92,7 @@ function App() {
           }
         ></Route>
         {/* going to pass the userPosts through profile to map and pass through to a HTML component to render all userposts  */}
-        <Route path="/profile" element={<Profile userPosts={userPosts} setToken={setToken} user={user}/>}></Route>
+        <Route path="/profile" element={<Profile userPosts={userPosts} setToken={setToken} user={user} posts={posts} setPosts={setPosts}/>}></Route>
         <Route path="*" element={<ErrorComponent />}>
           {" "}
         </Route>

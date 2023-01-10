@@ -125,15 +125,29 @@ export const createNewPost = async (title, description, price) => {
 };
 
 
-export const deletePost = async (token) => {
+export const deletePost = async (posts, setPosts,postId) => {
+  // console.log(posts);
+  console.log(postId);
+  const token = window.localStorage.getItem("token");
+  console.log(token);
+
   try { 
-    const response = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts/5e8d1bd48829fb0017d2233b`, {
+    const response = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts/${postId}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
     })
+    const data = await response.json();
+    console.log('this is data in delete', data);
+    if (data) {
+      console.log('this is posts before getting reset',posts)
+      const newPosts = posts.filter(post => post._id !== postId)
+      setPosts(newPosts)
+      console.log('this is posts after getting reset',posts)
+    }
+  
 
   } catch (error) {
     console.log(error);
