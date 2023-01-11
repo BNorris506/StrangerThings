@@ -41,13 +41,28 @@ export const getPosts = async (setPosts) => {
   fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts`)
   .then(response => response.json())
   .then(result => {
-    // console.log(result.data.posts);
+    console.log(result.data.posts);
     setPosts(result.data.posts)
   })
   .catch(console.error);
 
 }
 
+
+export const getPostsById = async (id, setPosts) => {
+  // call the API
+  // take the returned data and parse into JSON 
+  // return the results (array of objects) to be displayed on the poage via  our Posts component 
+
+  fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts`)
+  .then(response => response.json())
+  .then(result => {
+    console.log(result.data.posts);
+    setPosts(result.data.posts)
+  })
+  .catch(console.error);
+
+}
 
 
 export const fetchMe = async (token) => {
@@ -125,11 +140,11 @@ export const createNewPost = async (title, description, price) => {
 };
 
 
-export const deletePost = async (posts, setPosts,postId) => {
+export const deletePost = async (posts, setPosts, setMyPosts, postId) => {
   // console.log(posts);
-  console.log(postId);
+  // console.log(postId);
   const token = window.localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   try { 
     const response = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts/${postId}`, {
@@ -139,15 +154,32 @@ export const deletePost = async (posts, setPosts,postId) => {
         'Authorization': `Bearer ${token}`
       }
     })
+
     const data = await response.json();
     console.log('this is data in delete', data);
-    if (data) {
-      console.log('this is posts before getting reset',posts)
-      const newPosts = posts.filter(post => post._id !== postId)
-      setPosts(newPosts)
-      console.log('this is posts after getting reset',posts)
-    }
-  
+    const reply = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/posts`)
+    const rep = await reply.json();
+    console.log(rep);
+    setPosts(rep.data.posts);
+    
+  //   const var1 = await fetch(`https://strangers-things.herokuapp.com/api/${cohortName}/users/me`,{
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`
+  //     }
+  // })
+  //   const var2 = await var1.json();
+  //   // console.log(var2);
+  //   const myPosts = var2.data.posts
+  //   console.log(myPosts);
+    
+  //   if (data) {
+  //     const newMyPosts = myPosts.filter(post => post._id !== postId)
+  //     setMyPosts(newMyPosts)
+  //     console.log(newMyPosts);
+  //     console.log('this is posts after getting reset',myPosts)
+  //   }
+  return data.success
 
   } catch (error) {
     console.log(error);

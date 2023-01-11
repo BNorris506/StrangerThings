@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import PostsComponent from "./PostsComponent";
 import { Link } from "react-router-dom";
 
 const GuestHome = ({ posts }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
   return (
     <div>
       <header>
@@ -19,8 +23,15 @@ const GuestHome = ({ posts }) => {
             If you would like to make a post, please Register above.
           </h3>
         </section>
+        <input
+            className="search"
+            placeholder="Search for posts by Title"
+            value={searchTerm}
+            type="text"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          ></input>
         {/* Map through the posts array created in App.jsx and create a new array of the singlePost */}
-        {posts.map((singlePost) => {
+        {filteredPosts.map((singlePost) => {
           // Run PostsComponent with the following Props and give me that HTML on my page. BooYah.
           return (
             <PostsComponent key={singlePost._id} singlePost={singlePost} />

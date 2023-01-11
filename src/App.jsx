@@ -35,12 +35,7 @@ function App() {
 //   console.log('this is the user variable on app.js', user);
 // then taking the new user from the useEffect above to create a userPosts array of objects to use in displaying specific user posts only on profile page 
 
-  const userPosts = user.posts;
-
-  // useEffect((user) => {
-  //   console.log(user.posts)
-  //   setUserPosts(user.posts);
-  // }, []);
+  // const userPosts = user.posts;
 
 // console.log('this is user array of object messages called userPosts',userPosts);
 
@@ -92,7 +87,7 @@ function App() {
           }
         ></Route>
         {/* going to pass the userPosts through profile to map and pass through to a HTML component to render all userposts  */}
-        <Route path="/profile" element={<Profile userPosts={userPosts} setToken={setToken} user={user} posts={posts} setPosts={setPosts}/>}></Route>
+        <Route path="/profile" element={<Profile token={token} setToken={setToken} user={user} posts={posts} setPosts={setPosts}/>}></Route>
         <Route path="*" element={<ErrorComponent />}>
           {" "}
         </Route>

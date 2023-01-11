@@ -84,7 +84,7 @@ const getMe = async () => {
   return data;
 };
 
-export const MyPosts = ({ singlePost, posts, setPosts }) => {
+export const MyPosts = ({ singlePost, posts, setPosts, setMyPosts }) => {
   
   const postId = singlePost._id;
   
@@ -95,8 +95,12 @@ export const MyPosts = ({ singlePost, posts, setPosts }) => {
       <p>{singlePost.author.username}</p>
       <p>{singlePost.price}</p>
       {/* <button>Delete Post</button> */}
-      <button onClick={() => deletePost(posts, setPosts, postId)}>Delete Post</button>
-      
+      <form onSubmit={async (e) => {
+        e.preventDefault();
+        deletePost(posts, setPosts, setMyPosts, postId)
+      }}>
+        <button type="submit">Delete Post</button>
+      </form>
     </div>
   );
 };
